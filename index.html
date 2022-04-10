@@ -13,13 +13,24 @@
 </head>
 <body>
     <div id="main">
-        <button onclick="toast('Toast')">Toast 1</button>
-        <button onclick="toast('Toast error', '#C00000')">Toast Error</button>
+        <div id="content">
+            <h1 id="goodday"></h1>
+            <div id="links">
+                <div id="linkSpotify" class="links"><img src="assets\images\icon3@2x.png" alt="spotify" class="linkImg"><a class="removeHyperlink" target="_blank" href="https://open.spotify.com/artist/5mR591hlFxZhgIwaiuIaT2?si=1E4o4m0QRHirmP8iwdZ-Ag">Lynr on Spotify</a></div>
+                <div id="linkInstagram" class="links"> </div>
+                <div id="linkAbout" class="links"> </div>
+                <div id="2" class="links"> </div>
+                <div id="3" class="links"> </div>
+                <div id="4" class="links"> </div>
+            </div>
+        </div>
     </div>
     <audio src="assets\audio\letitgo.mp3" id="audio"></audio>
     <div id="leftPanel">
+        <button onclick="toast('Toast')">Toast 1</button>
+        <button onclick="toast('Toast error', '#C00000')">Toast Error</button>
     <div id='header'>
-        <img id="lynrBeatsImg" src="assets\images\logo.png">
+        <img alt="cover" id="lynrBeatsImg" src="assets\images\logo.png">
         <p id="lynrBeatsTitle">LynrBeats</p>
     </div>
     </div>
