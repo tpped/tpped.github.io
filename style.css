@@ -21,23 +21,37 @@
 }
 @keyframes rainbow {
   0% {
-    color: #ff0000;
+    background: linear-gradient(to bottom, #ff0000, #181818 50%, #181818 100%);
+
   }
   25% {
-    color: #ff7f00;
+    background: linear-gradient(to bottom, #ff7f00, #181818 50%, #181818 100%);
+
   }
   50% {
-    color: #ffff00;
+    background: linear-gradient(to bottom, #ffff00, #181818 50%, #181818 100%);
+
   }
   75% {
-    color: #00ff00;
+    background: linear-gradient(to bottom, #00ff00, #181818 50%, #181818 100%);
+
   }
   100% {
-    color: #0000ff;
+    background: linear-gradient(to bottom, #00ffff, #181818 50%, #181818 100%);
+
+  }
+}
+@keyframes rgbchange{
+  /** make an that changes the background color using hue rotate */
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
   }
 }
 :root {
-    --fade-color: #acacac;
+    --fade-color: #680000;
 }
 body {
     font-family: 'Spotify', sans-serif;
@@ -77,8 +91,8 @@ body {
     position: fixed;
     top: 0;
     left: 250px;
-    background: linear-gradient(to bottom, var(--fade-color), #181818 50%, #181818 100%);
     bottom: 91px;
+    background: linear-gradient(to bottom, #ff0000, #181818 50%, #181818 100%);
 }
 
 #controls {
@@ -301,10 +315,49 @@ body {
   align-items: center;
 }
 
+#content {
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
+  padding-top: 40px;
+}
+#goodday {
+  font-size: 40px;
+  font-weight: 700;
+  padding-bottom: 20px;
+  color: rgba(255, 255, 255, 0.884);
+  letter-spacing: -2px;
+}
 
-
-
-
+#links {
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-rows: 80px 80px; 
+  gap: 12px 24px; 
+  grid-template-areas: 
+    ". . ."
+    ". . ."; 
+}
+.links {
+  background-color: #53535385;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+.linkImg {
+  height: 80px;
+  width: 80px;
+  padding-right: 10px;
+  border-radius: 10px 10px;
+}
+.removeHyperlink {
+  text-decoration: none;
+  color: white;
+}
 
 
 
