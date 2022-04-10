@@ -10,7 +10,7 @@ function init(){
     setVolume();
     $('#toast').hide();
     // console.log("%cMade with ❤️ by tapped", "color: #199F4A; font-size: 20px;");
-    
+    goodDay();
     document.addEventListener("keydown", function(e){
         if(e.keyCode == 32){
             if(audio.paused){
@@ -120,27 +120,31 @@ function loveThisSong() {
     $.getJSON('http://ip-api.com/json/?fields=query,hosting', function(data) {
         console.log(data.hosting);
 })
-.done(function () {toast('Feedback has been sent! <3');})
+.done(function () {toast('Feedback has been sent! <3', '#2E77D0');
+$('#main').css('animation', 'rgbchange 10s linear infinite');})
 .fail(function () {toast('Failed to send Feedback: try disabling adblockers', '#BA0000');})
 }
-
 
 function toast(text, color) {
     $('#toast-text').text(text);
     $('#toast').css('background-color', color);
     $('#toast').fadeIn(400).delay(4000).fadeOut(400);
+};
+
+function goodDay() {
+    var today = new Date()
+    var curHr = today.getHours()
+    if (curHr < 12) {
+    $('#goodday').text('Good Morning');
+    } else if (curHr < 18) {
+    $('#goodday').text('Good Afternoon');
+    } else {
+    $('#goodday').text('Good Evening');
+    }
 }
 
 
 
-// function toast(text) {
-//     document.getElementById("toast-text").innerHTML = text;
-//     var div = document.getElementById("toast");
-//     div.style.opacity = "1";
-//     setTimeout(function(){
-//         div.style.opacity = "0";
-//     }, 5000);
-// }
 
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!SONGS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
