@@ -11,64 +11,7 @@
     <link rel="icon" type="image" href="assets/images/check.png">
 </head>
 <body>
-    <div id="sidePanel">
-        <div id="header-container">
-            <p id="headerheader">
-                tapped's
-            </p>
-            <br>
-            <p id="header">
-                To-Do List  
-            </p>
-        </div>
-        <div id="addTask">    
-            <label for="addTaskTitle">Add a title</label>
-            <input class="text-input" type="text" id="addTaskTitle" placeholder="Add a title...">
-            <p class="err" id="errTitle"></p>
-            <label for="addTastDescription">Add a task description</label>
-            <input class="text-input" type="text" id="addTaskDescription" placeholder="Add a description...">
-            <p class="err" id="errDesc"></p>
-            <label for="addTaskDate">Add a date</label>
-            <input class="text-input" type="date" id="addTaskDate">
-            <p class="err" id="errDate"></p>
-            <label for="addTaskTime">Add a Time</label>
-            <input class="text-input" id="addTaskTime" type="time">
-            <p class="err" id="errTime"></p>
-            <input onclick="checks()" class="text-input hover-scale addTaskSubmit" value="Create Task!" type="submit" name="Submit" id="addTaskSubmit">
-            <p class="err" id="errSubmit"></p>
-        </div>
-        <div onclick="$('#settings-container').fadeIn()" id="settings">
-            <img id="settingsimg"a src="assets/images/settings.png" alt="settings">
-            <p id="settingsText">Settings</p>
-        </div>
-    </div>  
-    <div id="tasks">
-        
-    </div>
-
-    <div id="settings-container">
-        <div id="settingsMenu">
-            <div id="settingsHeader"><h2>Settings</h2><img onclick="$('#settings-container').fadeOut()" class="ximg hover-scale" src="assets/images/x.png" alt="cross"></div>
-            <div class="seperator"></div>
-            <div class="setting" id="ligthdarkmode-container">
-                <p class="settingText">Darkmode</p>
-                <input class="settingText" type="checkbox" checked onchange="lightDark(this)" id="checkbox">
-            </div>
-            <div class="setting" id="ligthdarkmode-container">
-                <p id="settingBlur" class="settingText">Window Blur </p>
-                <input class="settingText slider" type="range" value="10" min="0" max="20" step="0.5" oninput="bgblur(this.value)">
-            </div>
-            <div class="setting" id="ligthdarkmode-container">
-                <p id="settingBlur" class="settingText">Background Image </p>
-                <div>
-                    <input type="button" class="defaultImageButton" value="Random" onclick="bgImage('https://source.unsplash.com/random/')">
-                    <input type="button" class="defaultImageButton" value="Default" onclick="bgImage('assets/images/chillin.gif')">
-                    <input class="settingText settingInput" placeholder="https://example.com/image.png" type="text" onchange="bgImage(this.value)">
-                </div>
-            </div>
-            
-        </div>
-    </div>
+    <a href="/projects/todo.html">yeet</a>
 </body>
 </html>
 
