@@ -1,160 +1,116 @@
-var audio = new Audio("assets/audio/letitgo.mp3");
-var getVol;
-var beforemute;
+var titleVar;
+var descVar;
+var dateVar;
+var timeVar;
+$(document).ready(function() {
+    $('#settings-container').hide()
+    titleVar = document.getElementById('addTaskTitle');
+    descVar = document.getElementById('addTaskDescription');
+    dateVar = document.getElementById('addTaskDate');
+    timeVar = document.getElementById('addTaskTime');
+    $('.err').hide()
+    $('#settings').on('mouseenter', function(){
+        document.querySelector(':root').style.setProperty('--rotateit', 'rotate(45deg)');
+        document.querySelector(':root').style.setProperty('--scale', 'scale(1.1)');
+    })
+    $('#settings').on('mouseleave', function(){
+        document.querySelector(':root').style.setProperty('--rotateit', 'rotate(0deg)');
+        document.querySelector(':root').style.setProperty('--scale', 'scale(1)');
+    })
 
-
-function init(){
-    myFunc = function(){};
-    document.getElementById("volumeSlider").addEventListener("input", setVolume);
-    document.getElementById("volumeSlider").addEventListener("change", setVolume);
-    setVolume();
-    $('#toast').hide();
-    // console.log("%cMade with ❤️ by tapped", "color: #199F4A; font-size: 20px;");
-    goodDay();
-    document.addEventListener("keydown", function(e){
-        if(e.keyCode == 32){
-            if(audio.paused){
-                playAudio();
-            }else{
-                pauseAudio();
-            }
-        }
-    });
-
-    var intervalId = window.setInterval(function(){
-        progressBar();
-        document.getElementById("audioProgress").dispatchEvent(new Event('input'));
-      }, 200);
-      
-}
-
-
-function playAudio () {
-    audio.play();
-    document.getElementById("playpause").setAttribute("name", "pause-circle-sharp");
-    document.getElementById("playpause").setAttribute("onclick", "pauseAudio()");
-}
-
-function pauseAudio () {
-    audio.pause();
-    document.getElementById("playpause").setAttribute("name", "play-circle-sharp");
-    document.getElementById("playpause").setAttribute("onclick", "playAudio()");
-}
-
-function stopAudio () {
-    audio.pause();
-    audio.currentTime = 0;
-    document.getElementById("playpause").setAttribute("name", "play-circle-sharp");
-    document.getElementById("playpause").setAttribute("onclick", "playAudio()");
-}
-function loopAudio() {
-    if (audio.loop == false) {
-        audio.loop = true;
-        document.getElementById("loop").style.color = "#199F4A";
-        document.getElementById("loop").style.opacity = "1";
-    } else {
-        audio.loop = false;
-        document.getElementById("loop").style.color = "";
-        document.getElementById("loop").style.opacity = "";
-    }
-}
-
-function muteAudio() {
-    if (audio.muted == false) {
-        audio.muted = true;
-        beforemute = audio.volume;
-        audio.volume = 0;
-        document.getElementById("volumeSlider").value = 0;
-        document.getElementById("volumeSlider").dispatchEvent(new Event('input'));
-        document.getElementById("ion-icon").setAttribute("name", "volume-mute");
-    } else {
-        audio.muted = false;
-        audio.volume = beforemute;
-        document.getElementById("volumeSlider").value = beforemute * 100;
-        document.getElementById("volumeSlider").dispatchEvent(new Event('input'));
-    }
-}
-
-function setVolume() {
-    if (document.getElementById("volumeSlider").value < 10) {
-        getVol = "0.0" + document.getElementById("volumeSlider").value;
-    } else {
-        getVol = "0." + document.getElementById("volumeSlider").value;
-    }
-    audio.volume = getVol;   
-    if (getVol == 0.00) {document.getElementById("ion-icon").setAttribute("name", "volume-off-outline");}
-    else if (getVol < 0.30) {document.getElementById("ion-icon").setAttribute("name", "volume-low-outline");}
-    else if (getVol < 0.70) {document.getElementById("ion-icon").setAttribute("name", "volume-medium-outline");}
-    else {document.getElementById("ion-icon").setAttribute("name", "volume-high-outline");}
-}
-
-function progressBar() { 
-    var minutes1 = Math.floor(audio.currentTime / 60);
-    var seconds1 = Math.floor(audio.currentTime - minutes1 * 60);
-    var minutes = Math.floor(audio.duration / 60);
-    var seconds = Math.floor(audio.duration - minutes * 60);
-    var progress = document.getElementById("audioProgress");
-    var value = 0;
-    if (audio.currentTime > 0) {
-        value = Math.floor((100 / audio.duration) * audio.currentTime);
-    }
-    progress.value = value;
-    if (seconds < 10) {
-        seconds = "0" + seconds;
-    }
-    document.getElementById("duration").innerHTML = minutes + ":" + seconds;
-    
-    if (seconds1 < 10) {
-        seconds1 = "0" + seconds1;
-    } 
-    document.getElementById("progress").innerHTML = minutes1 + ":" + seconds1;
-    
-}
-
-
-function loveThisSong() {
-    document.getElementById("heart").setAttribute("name", "heart");
-    document.getElementById("heart2").setAttribute("name", "heart");
-    document.getElementById("heart").setAttribute("onclick", "");
-    document.getElementById("heart2").setAttribute("onclick", "");
-    $.getJSON('http://ip-api.com/json/?fields=query,hosting', function(data) {
-        console.log(data.hosting);
 })
-.done(function () {toast('Feedback has been sent! <3', '#2E77D0');
-$('#main').css('animation', 'rgbchange 10s linear infinite');})
-.fail(function () {toast('Failed to send Feedback: try disabling adblockers', '#BA0000');})
+// $(window).on('resize', function(){
+//     tasksresize();
+// })
+// function tasksresize() {
+//     $('#tasks').css('width', window.innerWidth - 270 + 'px');
+//     $('#tasks').css('height', window.innerHeight+ 'px');
+// }
+function blurr() {
+    var blurval = document.getElementById('blurr').value;
+    console.log(blurval)
+    document.querySelector(':root').style.setProperty('--blur-val', 'blur('+blurval + 'px)');
 }
-
-function toast(text, color) {
-    $('#toast-text').text(text);
-    $('#toast').css('background-color', color);
-    $('#toast').fadeIn(400).delay(4000).fadeOut(400);
-};
-
-function goodDay() {
-    var today = new Date()
-    var curHr = today.getHours()
-    if (curHr < 12) {
-    $('#goodday').text('Good Morning');
-    } else if (curHr < 18) {
-    $('#goodday').text('Good Afternoon');
+function huerotate() {
+    var huerotator = document.getElementById('huerotator').value;
+    console.log(huerotator)
+    document.querySelector(':root').style.setProperty('--hue-rotateit', 'hue-rotate('+huerotator + 'deg)');
+}
+function checks() {
+    var pass = true;
+    var titleLength = titleVar.value.length;
+    var descLength = descVar.value.length;
+    if (titleLength < 3 || titleLength > 32) {
+        $('#errTitle').show();
+        $('#errTitle').text('Please enter 3 - 32 characters.');
+        pass = false;
     } else {
-    $('#goodday').text('Good Evening');
+        $('#errTitle').hide();
+    }
+    if (descLength < 3 || descLength > 600) {
+        $('#errDesc').show();
+        $('#errDesc').text('Please enter 3 - 600 characters.');
+        pass = false;
+    } else {
+        $('#errDesc').hide();
+    }
+    if (dateVar.value == '') {
+        $('#errDate').show();
+        $('#errDate').text('Please enter a date.');
+        pass = false;
+    } else if (isInPast(new Date(dateVar.value))){
+        $('#errDate').show();
+        $('#errDate').text('Date already Passed!');  
+        pass = false;
+    } else {
+        $('#errDate').hide();
+    }
+    if (timeVar.value == '') {
+        $('#errTime').show();
+        $('#errTime').text('Please enter a Time.');
+        pass = false;
+    } else {
+        $('#errTime').hide();
+    }
+    if (pass) {
+        $('#errSubmit').hide();
+        var xyz = dateVar.value
+        var dateee = xyz.slice(8, 10) + xyz.slice(4, 8) + xyz.slice(0, 4)
+        addTask(titleVar.value, descVar.value, dateee, timeVar.value)
+    } else {
+        $('#errSubmit').show();
+        $('#errSubmit').text('Something went wrong.');
     }
 }
-
-
-
-
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!SONGS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
-function shotsSong() {
-    stopAudio();
-    audio = new Audio('assets/audio/shots.mp3');
-    document.getElementById("songName").innerHTML = "Shots";
-    document.getElementById("artistName").innerHTML = "Lynr";
-    document.getElementById("songCover").setAttribute("src", "assets/images/shots.jpg");
-    playAudio();
+function isInPast(date) {
+    const today = new Date();
+    return date < today.setDate(today.getDate() - 1);
+}
+function delTask(e) {
+    $(e).parent().parent().fadeOut(500, function() {setTimeout($(e).parent().remove(), 100)});
 }
 
-  
+//$("").fadeOut(400, function() {this.parent().remove()})
+function addTask(addTextTitle, addTextDesc, addTextDate, addTextTime) {
+    $('#tasks').append('<div class="task fadein"><div id="taskHeaderContainer"><h1 class="title">'+addTextTitle+'</h1><img onclick="delTask(this)" class="ximg" src="assets/images/x.png" alt="cross"></div><div class="seperator"></div><p id="description">'+addTextDesc+'</p><div class="seperator"></div><p class="duetill">Task due till: '+addTextDate+' at '+addTextTime+'</p></div>')
+    $('.fadein').animate({
+        opacity: 1
+    }, 800, function() {
+        $('.fadein').removeClass('fadein')
+    });
+    dateVar.value = '';
+    titleVar.value = '';
+    descVar.value = '';
+    timeVar.value = '';
+
+}
+
+function bgblur(n) {
+    document.querySelector(':root').style.setProperty('--blur-val', 'blur('+n+'px)')
+    document.cookie = "blur="+n+"; expires= Thu, 18 Dec 2025 12:00:00 UTC"
+    //$('#settingBlur').text('Window Blur: '+n+'px')
+}
+
+function bgImage(img) {
+    document.querySelector(':root').style.setProperty('--bg-image', 'url('+img+')')
+}
