@@ -34,7 +34,7 @@
             <label for="addTaskTime">Add a Time</label>
             <input class="text-input" id="addTaskTime" type="time">
             <p class="err" id="errTime"></p>
-            <input onclick="checks()" class="text-input addTaskSubmit" value="Create Task!" type="submit" name="Submit" id="addTaskSubmit">
+            <input onclick="checks()" class="text-input hover-scale addTaskSubmit" value="Create Task!" type="submit" name="Submit" id="addTaskSubmit">
             <p class="err" id="errSubmit"></p>
         </div>
         <div onclick="$('#settings-container').fadeIn()" id="settings">
@@ -48,11 +48,11 @@
 
     <div id="settings-container">
         <div id="settingsMenu">
-            <div id="settingsHeader"><h2>Settings</h2><img onclick="$('#settings-container').fadeOut()" class="ximg" src="assets/images/x.png" alt="cross"></div>
+            <div id="settingsHeader"><h2>Settings</h2><img onclick="$('#settings-container').fadeOut()" class="ximg hover-scale" src="assets/images/x.png" alt="cross"></div>
             <div class="seperator"></div>
             <div class="setting" id="ligthdarkmode-container">
                 <p class="settingText">Darkmode</p>
-                <input class="settingText" type="checkbox" checked id="checkbox">
+                <input class="settingText" type="checkbox" checked onchange="lightDark(this)" id="checkbox">
             </div>
             <div class="setting" id="ligthdarkmode-container">
                 <p id="settingBlur" class="settingText">Window Blur </p>
@@ -61,10 +61,12 @@
             <div class="setting" id="ligthdarkmode-container">
                 <p id="settingBlur" class="settingText">Background Image </p>
                 <div>
+                    <input type="button" class="defaultImageButton" value="Random" onclick="bgImage('https://source.unsplash.com/random/')">
                     <input type="button" class="defaultImageButton" value="Default" onclick="bgImage('assets/images/chillin.gif')">
                     <input class="settingText settingInput" placeholder="https://example.com/image.png" type="text" onchange="bgImage(this.value)">
                 </div>
             </div>
+            
         </div>
     </div>
 </body>
