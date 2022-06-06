@@ -1,80 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" defer integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" defer integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lynr Music</title>
+    <title>tapped's To-Do List</title>
+    <script src="assets/js-libs/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/88/88198.png">
     <script src="script.js"></script>
+    <link rel="icon" type="image" href="assets/images/check.png">
 </head>
 <body>
-    <div id="main">
-        <div id="content">
-            <h1 id="goodday"></h1>
-            <div id="links">
-                <div id="linkSpotify" class="links"><img src="assets\images\icon3@2x.png" alt="spotify" class="linkImg"><a class="removeHyperlink" target="_blank" href="https://open.spotify.com/artist/5mR591hlFxZhgIwaiuIaT2?si=1E4o4m0QRHirmP8iwdZ-Ag">Lynr on Spotify</a></div>
-                <div id="linkInstagram" class="links"> </div>
-                <div id="linkAbout" class="links"> </div>
-                <div id="2" class="links"> </div>
-                <div id="3" class="links"> </div>
-                <div id="4" class="links"> </div>
+    <div id="sidePanel">
+        <div id="header-container">
+            <p id="headerheader">
+                tapped's
+            </p>
+            <br>
+            <p id="header">
+                To-Do List  
+            </p>
+        </div>
+        <div id="addTask">    
+            <label for="addTaskTitle">Add a title</label>
+            <input class="text-input" type="text" id="addTaskTitle" placeholder="Add a title...">
+            <p class="err" id="errTitle"></p>
+            <label for="addTastDescription">Add a task description</label>
+            <input class="text-input" type="text" id="addTaskDescription" placeholder="Add a description...">
+            <p class="err" id="errDesc"></p>
+            <label for="addTaskDate">Add a date</label>
+            <input class="text-input" type="date" id="addTaskDate">
+            <p class="err" id="errDate"></p>
+            <label for="addTaskTime">Add a Time</label>
+            <input class="text-input" id="addTaskTime" type="time">
+            <p class="err" id="errTime"></p>
+            <input onclick="checks()" class="text-input addTaskSubmit" value="Create Task!" type="submit" name="Submit" id="addTaskSubmit">
+            <p class="err" id="errSubmit"></p>
+        </div>
+        <div onclick="$('#settings-container').fadeIn()" id="settings">
+            <img id="settingsimg"a src="assets/images/settings.png" alt="settings">
+            <p id="settingsText">Settings</p>
+        </div>
+    </div>  
+    <div id="tasks">
+        
+    </div>
+
+    <div id="settings-container">
+        <div id="settingsMenu">
+            <div id="settingsHeader"><h2>Settings</h2><img onclick="$('#settings-container').fadeOut()" class="ximg" src="assets/images/x.png" alt="cross"></div>
+            <div class="seperator"></div>
+            <div class="setting" id="ligthdarkmode-container">
+                <p class="settingText">Darkmode</p>
+                <input class="settingText" type="checkbox" checked id="checkbox">
+            </div>
+            <div class="setting" id="ligthdarkmode-container">
+                <p id="settingBlur" class="settingText">Window Blur </p>
+                <input class="settingText slider" type="range" value="10" min="0" max="20" step="0.5" oninput="bgblur(this.value)">
+            </div>
+            <div class="setting" id="ligthdarkmode-container">
+                <p id="settingBlur" class="settingText">Background Image </p>
+                <div>
+                    <input type="button" class="defaultImageButton" value="Default" onclick="bgImage('assets/images/chillin.gif')">
+                    <input class="settingText settingInput" placeholder="https://example.com/image.png" type="text" onchange="bgImage(this.value)">
+                </div>
             </div>
         </div>
     </div>
-    <audio src="assets\audio\letitgo.mp3" id="audio"></audio>
-    <div id="leftPanel">
-        <button onclick="toast('Toast')">Toast 1</button>
-        <button onclick="toast('Toast error', '#C00000')">Toast Error</button>
-    <div id='header'>
-        <img alt="cover" id="lynrBeatsImg" src="assets\images\logo.png">
-        <p id="lynrBeatsTitle">LynrBeats</p>
-    </div>
-    </div>
-    <div id="bottomPanel">
-        <div id="name">
-            <img src="assets\images\logo.png" id="songCover" alt="logo"> 
-            <div id="nameText">
-                <p id="songName">Let It Go</p>
-                <p id="artistName">LynR</p>
-            </div>
-            <ion-icon class="heart" id="heart" onclick="loveThisSong()" name="heart-outline"></ion-icon>
-        </div>
-
-        <div id="controls">
-            <div id="buttons">
-                <ion-icon class="heart" id="heart2" onclick="loveThisSong()" name="heart-outline"></ion-icon>
-                <ion-icon id="cart" name="cart-sharp"></ion-icon>
-                <ion-icon id="playpause" name="play-circle-sharp" onclick="playAudio()"></ion-icon>
-                <ion-icon id="stop" onclick="stopAudio()" name="stop-sharp"></ion-icon>
-                <ion-icon id="loop" onclick="loopAudio()" name="infinite"></ion-icon>
-            </div>
-            <div id="progressBarStuff">
-                <p id="progress">0:00</p>
-                <input class="styled-slider slider-progress" type="range" id="audioProgress" onchange="progressBar()" oninput="progressBar()" min="0" max="100" step="0.01" value="0">
-                <p id="duration">0:00</p>
-            </div>
-        </div>   
-
-        <div id="volume">
-                <ion-icon onclick="muteAudio()" id="ion-icon" name="volume-medium-outline"></ion-icon>
-                <input class="styled-slider slider-progress" type="range" min="0" max="99" value="49.5" id="volumeSlider" draggable="false">
-        </div>      
-    </div>
-    <div id="toast-container">
-        <div id="toast">
-            <p id="toast-text"></p>
-        </div>
-    </div>
-    
-
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script>window.onload = function(){init();}</script>
-    <script>for(let e of document.querySelectorAll('input[type="range"].slider-progress')){e.style.setProperty('--value',e.value);e.style.setProperty('--min',e.min==''?'0':e.min);e.style.setProperty('--max',e.max==''?'100':e.max);e.addEventListener('input',()=>e.style.setProperty('--value',e.value))}</script>
-
 </body>
 </html>
+
+
+<!--<input oninput="blurr()" id="blurr" step="0.5" type="range" value="3" min="0" max="20" draggable="false">--> 
+<!--<input oninput="huerotate()" id="huerotator" type="range" value="0" min="0" max="360" draggable="false">-->
+<!--<input type="file" id="fileupload" name="background" accept="image/png, image/jpg, image/jpeg, image/gif" onchange="changebg()">-->
