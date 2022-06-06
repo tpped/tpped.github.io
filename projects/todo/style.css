@@ -1,0 +1,271 @@
+:root {
+    --bg-image: url('assets/images/chillin.gif');
+    --blur-val: blur(10px);
+    --hue-rotateit: hue-rotate(0deg);
+    --rotateit: rotate(0deg);
+    --scale: scale(1);
+    --colorscheme: rgba(7, 7, 7, 0.452);
+    --text-color: white;
+    /*dark rgba(7, 7, 7, 0.452)*/
+    /*light rgba(255, 255, 255, 0.452);*/
+}
+body {
+    overflow: overlay;
+    background: var(--bg-image);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#sidePanel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px 20px 20px 20px;
+    width: 230px;
+    height: 100%;
+    border-radius: 0 10px 10px 0;
+    background: var(--colorscheme);
+    backdrop-filter: var(--blur-val);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.288),
+                0 0 0 2px rgba(27, 27, 27, 0.473);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+}
+#header-container {
+    border-bottom: 2px rgba(110, 110, 110, 0.575) solid;
+    padding-bottom: 0px;
+    margin-bottom: 20px;
+}
+
+#headerheader {
+    font-size: 10px;
+    margin-bottom: 0;
+    transform: translateY(30px);
+}
+#header {
+    margin-top: 0;
+    font-weight: 500;
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.err {
+    font-size: 12px;
+    color: rgba(255, 0, 0, 0.822);
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    transform: translateY(-8px);
+}
+
+
+.text-input {
+    width: 95%;
+    overflow: auto;
+    padding: 5px;
+    box-sizing: content-box;
+    border-radius: 5px;
+    background: rgb(255, 255, 255);
+    outline: none;
+    border: none;
+    margin: 5px 0 10px 0;
+}
+
+.addTaskSubmit {
+    background: rgba(0, 206, 0, 0.705);
+    color: white;
+    box-shadow: 0 0 0 1px rgb(58, 58, 58),
+                0 0 0 2px rgba(255, 255, 255, 0.432);
+    cursor: pointer;
+    transition: 0.3s;
+}
+#settings {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    color: var(--text-color);
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.507),
+                0 0 0 1px rgba(54, 54, 54, 0.445);
+    backdrop-filter: blur(3px);
+    border-radius: 10px;
+    height: 40px;
+    justify-self: flex-end;
+    width: 230px;
+    transition: 0.3s;
+    transform: var(--scale);
+    user-select: none;
+    cursor: pointer;
+    bottom: 60px;
+
+}
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+#settingsimg {
+    transform: var(--rotateit);
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    transition: 0.5s;
+}
+
+#tasks {
+    left: 270px;
+    top: 0;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-x:hidden;
+}
+
+.task {
+    color: var(--text-color);
+    width: 450px;
+    overflow: auto;
+    overflow-wrap:break-word;
+    background: var(--colorscheme);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.288),
+                0 0 0 2px rgba(27, 27, 27, 0.473);
+    backdrop-filter: var(--blur-val);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px;
+    transition: 0.3s;
+}
+.seperator {
+    width: 100%;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(194, 194, 194, 0.356);
+    border-radius: 1px;
+}
+.duetill {
+    color: rgb(122, 122, 122);
+    font-size: 13px;
+    align-self: center;
+}
+.fadein {
+    opacity: 0;
+}
+
+#settings-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(14, 14, 14, 0.205);
+    /*backdrop-filter: var(--blur-val);*/
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#settingsMenu {
+    width: 700px;
+    height: 400px;
+    background: var(--colorscheme);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.288),
+                0 0 0 2px rgba(27, 27, 27, 0.473);
+    backdrop-filter: var(--blur-val);
+    border-radius: 20px;
+    color: var(--text-color);
+    padding: 20px;
+}
+h2 {
+    margin: 0 0 15px 0;
+    font-size: 30px;
+}
+
+.setting {
+    
+    background: var(--colorscheme);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.288),
+                0 0 0 2px rgba(27, 27, 27, 0.473);
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.settingText {
+    margin: 0px 10px 0px 10px;
+}
+#settingsHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.ximg {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.settingInput {
+    box-sizing: content-box;
+    border-radius: 5px;
+    background: rgb(255, 255, 255);
+    outline: none;
+    border: none;
+    padding: 2px;
+}
+.defaultImageButton {
+    border-radius: 5px;
+    background: rgba(0, 206, 0, 0.705);
+    color: white;
+    border: 0;
+    box-shadow: 0 0 0 1px rgb(0, 0, 0),
+                0 0 0 2px rgba(177, 177, 177, 0.432);
+}
+input[type="range"] {
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 5px;
+    color: white;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: white;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgb(58, 58, 58);
+}
+#taskHeaderContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgb(39, 39, 39);
+    border-radius: 20px;
+  }
+  ::-webkit-scrollbar-thumb:focus {
+    background: rgb(95, 95, 95);
+    border-radius: 20px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+  }
+
