@@ -2,20 +2,22 @@ var titleVar;
 var descVar;
 var dateVar;
 var timeVar;
+var rootVar;
 $(document).ready(function() {
     $('#settings-container').hide()
+    rootVar = document.querySelector(':root')
     titleVar = document.getElementById('addTaskTitle');
     descVar = document.getElementById('addTaskDescription');
     dateVar = document.getElementById('addTaskDate');
     timeVar = document.getElementById('addTaskTime');
     $('.err').hide()
     $('#settings').on('mouseenter', function(){
-        document.querySelector(':root').style.setProperty('--rotateit', 'rotate(45deg)');
-        document.querySelector(':root').style.setProperty('--scale', 'scale(1.1)');
+        rootVar.style.setProperty('--rotateit', 'rotate(45deg)');
+        rootVar.style.setProperty('--scale', 'scale(1.1)');
     })
     $('#settings').on('mouseleave', function(){
-        document.querySelector(':root').style.setProperty('--rotateit', 'rotate(0deg)');
-        document.querySelector(':root').style.setProperty('--scale', 'scale(1)');
+        rootVar.style.setProperty('--rotateit', 'rotate(0deg)');
+        rootVar.style.setProperty('--scale', 'scale(1)');
     })
 
 })
@@ -29,12 +31,12 @@ $(document).ready(function() {
 function blurr() {
     var blurval = document.getElementById('blurr').value;
     console.log(blurval)
-    document.querySelector(':root').style.setProperty('--blur-val', 'blur('+blurval + 'px)');
+    rootVar.style.setProperty('--blur-val', 'blur('+blurval + 'px)');
 }
 function huerotate() {
     var huerotator = document.getElementById('huerotator').value;
     console.log(huerotator)
-    document.querySelector(':root').style.setProperty('--hue-rotateit', 'hue-rotate('+huerotator + 'deg)');
+    rootVar.style.setProperty('--hue-rotateit', 'hue-rotate('+huerotator + 'deg)');
 }
 function checks() {
     var pass = true;
@@ -106,11 +108,25 @@ function addTask(addTextTitle, addTextDesc, addTextDate, addTextTime) {
 }
 
 function bgblur(n) {
-    document.querySelector(':root').style.setProperty('--blur-val', 'blur('+n+'px)')
+    rootVar.style.setProperty('--blur-val', 'blur('+n+'px)')
     document.cookie = "blur="+n+"; expires= Thu, 18 Dec 2025 12:00:00 UTC"
     //$('#settingBlur').text('Window Blur: '+n+'px')
 }
 
 function bgImage(img) {
-    document.querySelector(':root').style.setProperty('--bg-image', 'url('+img+')')
+    rootVar.style.setProperty('--bg-image', 'url('+img+')')
+}
+
+function lightDark(n) {
+    if (n.checked) {
+        console.log('checked');
+        rootVar.style.setProperty('--colorscheme', 'rgba(7, 7, 7, 0.452)');
+        rootVar.style.setProperty('--text-color', 'white');
+
+    } else {
+        console.log('unchecked');
+        rootVar.style.setProperty('--colorscheme', 'rgba(255, 255, 255, 0.352)');
+        rootVar.style.setProperty('--text-color', 'black');
+        
+    }
 }
