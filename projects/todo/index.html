@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tapped's To-Do List</title>
     <script src="assets/js-libs/jquery-3.6.0.js"></script>
+    <script src="assets/js-libs/jqueryui.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
     <link rel="icon" type="image" href="assets/images/check.png">
@@ -38,7 +39,7 @@
             <p class="err" id="errSubmit"></p>
         </div>
         <div onclick="$('#settings-container').fadeIn()" id="settings">
-            <img id="settingsimg"a src="assets/images/settings.png" alt="settings">
+            <img id="settingsimg"a draggable="false" src="assets/images/settings.png" alt="settings">
             <p id="settingsText">Settings</p>
         </div>
     </div>  
@@ -61,18 +62,16 @@
             <div class="setting" id="ligthdarkmode-container">
                 <p id="settingBlur" class="settingText">Background Image </p>
                 <div>
-                    <input type="button" class="defaultImageButton" value="Random" onclick="bgImage('https://source.unsplash.com/random/')">
+                    <input type="button" class="defaultImageButton" value="Random" onclick="bgImage('https://picsum.photos/1920/1080')">
                     <input type="button" class="defaultImageButton" value="Default" onclick="bgImage('assets/images/chillin.gif')">
                     <input class="settingText settingInput" placeholder="https://example.com/image.png" type="text" onchange="bgImage(this.value)">
                 </div>
             </div>
-            
+            <div class="setting" id="ligthdarkmode-container">
+                <p id="settingBlur" class="settingText">Window hue-shift </p>
+                <input class="settingText slider" type="range" value="0" min="0" max="360" step="1" oninput="huerotate(this.value)">
+            </div>
         </div>
     </div>
 </body>
 </html>
-
-
-<!--<input oninput="blurr()" id="blurr" step="0.5" type="range" value="3" min="0" max="20" draggable="false">--> 
-<!--<input oninput="huerotate()" id="huerotator" type="range" value="0" min="0" max="360" draggable="false">-->
-<!--<input type="file" id="fileupload" name="background" accept="image/png, image/jpg, image/jpeg, image/gif" onchange="changebg()">-->
