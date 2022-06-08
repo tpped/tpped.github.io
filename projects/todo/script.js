@@ -27,6 +27,7 @@ $(document).ready(function() {
         rootVar.style.setProperty('--scale', 'scale(1)');
     })
     readLocalStoragee();
+    loadBg();
 })
 // $(window).on('resize', function(){
 //     tasksresize();
@@ -35,15 +36,8 @@ $(document).ready(function() {
 //     $('#tasks').css('width', window.innerWidth - 270 + 'px');
 //     $('#tasks').css('height', window.innerHeight+ 'px');
 // }
-function blurr() {
-    var blurval = document.getElementById('blurr').value;
-    console.log(blurval)
-    rootVar.style.setProperty('--blur-val', 'blur('+blurval + 'px)');
-}
-function huerotate() {
-    var huerotator = document.getElementById('huerotator').value;
-    console.log(huerotator)
-    rootVar.style.setProperty('--hue-rotateit', 'hue-rotate('+huerotator + 'deg)');
+function huerotate(val) {
+    rootVar.style.setProperty('--hue-rotateit', 'hue-rotate('+val + 'deg)');
 }
 function checks() {
     var pass = true;
@@ -63,29 +57,23 @@ function checks() {
     } else {
         $('#errDesc').hide();
     }
-    if (dateVar.value == '') {
-        $('#errDate').show();
-        $('#errDate').text('Please enter a date.');
-        pass = false;
-    } else if (isInPast(new Date(dateVar.value))){
+    if (isInPast(new Date(dateVar.value))){
         $('#errDate').show();
         $('#errDate').text('Date already Passed!');  
         pass = false;
     } else {
         $('#errDate').hide();
     }
-    if (timeVar.value == '') {
-        $('#errTime').show();
-        $('#errTime').text('Please enter a Time.');
-        pass = false;
-    } else {
-        $('#errTime').hide();
+    if (pass && dateVar.value == '' && timeVar.value == '') {
+        $('#errSubmit').hide();
+        taskCount = parseInt(taskCount) + 1;
+        ls.setItem('taskCount', taskCount);
+        saveTaskToLS(titleVar.value, descVar.value, 0, 0, taskCount);
     }
-    if (pass) {
+    else if (pass) {
         $('#errSubmit').hide();
         var xyz = dateVar.value
         var dateee = xyz.slice(8, 10) + xyz.slice(4, 8) + xyz.slice(0, 4)
-        // add 1 to taskCount and save it to localStorage
         taskCount = parseInt(taskCount) + 1;
         ls.setItem('taskCount', taskCount);
         saveTaskToLS(titleVar.value, descVar.value, dateee, timeVar.value, taskCount);
@@ -117,7 +105,11 @@ function delTask(e) {
 
 function addTask(addTextTitle, addTextDesc, addTextDate, addTextTime, id) {
     if (addTextTitle == null || addTextDesc == null) { return}
-    $('#tasks').append('<div id=task'+id+' class="task fadein"><div id="taskHeaderContainer"><h1 class="title">'+addTextTitle+'</h1><img onclick="delTask(this)" class="ximg" src="assets/images/x.png" alt="cross"></div><div class="seperator"></div><p id="description">'+addTextDesc+'</p><div class="seperator"></div><p class="duetill">Task due till: '+addTextDate+' at '+addTextTime+'</p></div>')
+    if (addTextDate == 0 && addTextTime == 0) {
+        $('#tasks').append('<div id=task'+id+' class="task fadein"><div id="taskHeaderContainer"><h1 class="title">'+addTextTitle+'</h1><img onclick="delTask(this)" class="ximg" src="assets/images/x.png" alt="cross"></div><div class="seperator"></div><p id="description">'+addTextDesc+'</p></div>')
+    } else {
+     $('#tasks').append('<div id=task'+id+' class="task fadein"><div id="taskHeaderContainer"><h1 class="title">'+addTextTitle+'</h1><img onclick="delTask(this)" class="ximg" src="assets/images/x.png" alt="cross"></div><div class="seperator"></div><p id="description">'+addTextDesc+'</p><div class="seperator"></div><p class="duetill">Task due till: '+addTextDate+' at '+addTextTime+'</p></div>')
+    }
     $('.fadein').animate({
         opacity: 1
     }, 800, function() {
@@ -130,6 +122,11 @@ function addTask(addTextTitle, addTextDesc, addTextDate, addTextTime, id) {
 
 }
 
+function devAdd(title, desc, date, time, id, times) {
+    for (let i = 0; i < times; i++) {
+        addTask(title, desc, date, time, id)
+    }
+}
 function bgblur(n) {
     rootVar.style.setProperty('--blur-val', 'blur('+n+'px)')
     document.cookie = "blur="+n+"; expires= Thu, 18 Dec 2025 12:00:00 UTC"
@@ -138,26 +135,29 @@ function bgblur(n) {
 
 function bgImage(img) {
     rootVar.style.setProperty('--bg-image', 'url('+img+')')
+    ls.setItem('bgImage', img)
+    console.log(img);
 }
 
 function lightDark(n) {
     if (n.checked) {
-        console.log('checked');
         rootVar.style.setProperty('--colorscheme', 'rgba(7, 7, 7, 0.452)');
         rootVar.style.setProperty('--text-color', 'white');
 
     } else {
-        console.log('unchecked');
         rootVar.style.setProperty('--colorscheme', 'rgba(255, 255, 255, 0.352)');
         rootVar.style.setProperty('--text-color', 'black');
-        
     }
 }
-Storage.prototype.setObj = function(key, obj) {
-    return this.setItem(key, JSON.stringify(obj))
-}
-Storage.prototype.getObj = function(key) {
-    return JSON.parse(this.getItem(key))
+function loadBg() {
+    ls.getItem('bgImage')
+    if (ls.getItem('bgImage') == null) {
+        rootVar.style.setProperty('--bg-image', 'url(assets/images/chillin.gif)')
+        console.log('no bg image');
+    } else {
+        rootVar.style.setProperty('--bg-image', 'url('+ls.getItem("bgImage")+')')
+        console.log('bg image');
+    }
 }
 
 function readLocalStoragee() {
@@ -176,3 +176,4 @@ function readLocalStoragee() {
 
 
 }
+
