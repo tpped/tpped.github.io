@@ -28,17 +28,17 @@ $(document).ready(function() {
     })
     readLocalStoragee();
     loadBg();
-})
-// $(window).on('resize', function(){
-//     tasksresize();
-// })
-// function tasksresize() {
-//     $('#tasks').css('width', window.innerWidth - 270 + 'px');
-//     $('#tasks').css('height', window.innerHeight+ 'px');
-// }
-function huerotate(val) {
-    rootVar.style.setProperty('--hue-rotateit', 'hue-rotate('+val + 'deg)');
-}
+    bgblur();
+    huerotate();
+});
+function huerotate(n) {
+    if (n == null) {
+        rootVar.style.setProperty('--hue-rotateit', 'hue-rotate('+ls.getItem('hue')+'deg)');
+        document.getElementById('hueslider').value = ls.getItem('hue');
+    } else {
+    rootVar.style.setProperty('--hue-rotateit', 'hue-rotate('+n+'deg)');
+    ls.setItem('hue', n)
+    }};
 function checks() {
     var pass = true;
     var titleLength = titleVar.value.length;
@@ -72,27 +72,26 @@ function checks() {
     }
     else if (pass) {
         $('#errSubmit').hide();
-        var xyz = dateVar.value
-        var dateee = xyz.slice(8, 10) + xyz.slice(4, 8) + xyz.slice(0, 4)
+        var xyz = dateVar.value;
+        var dateee = xyz.slice(8, 10) + xyz.slice(4, 8) + xyz.slice(0, 4);
         taskCount = parseInt(taskCount) + 1;
         ls.setItem('taskCount', taskCount);
         saveTaskToLS(titleVar.value, descVar.value, dateee, timeVar.value, taskCount);
     } else {
         $('#errSubmit').show();
         $('#errSubmit').text('Something went wrong.');
-    }
-}
+}};
 function saveTaskToLS(title, desc, date, time, id) {
-    ls.setItem('task'+id +'title', title)
-    ls.setItem('task'+id +'desc', desc)
-    ls.setItem('task'+id +'date', date)
-    ls.setItem('task'+id +'time', time)
-    addTask(title, desc, date, time, id)
-}
+    ls.setItem('task'+id +'title', title);
+    ls.setItem('task'+id +'desc', desc);
+    ls.setItem('task'+id +'date', date);
+    ls.setItem('task'+id +'time', time);
+    addTask(title, desc, date, time, id);
+};
 function isInPast(date) {
     const today = new Date();
     return date < today.setDate(today.getDate() - 1);
-}
+};
 function delTask(e) {
     var n = e.parentElement.parentElement.id;
     localStorage.removeItem(n+'title');
@@ -100,44 +99,44 @@ function delTask(e) {
     localStorage.removeItem(n+'date');
     localStorage.removeItem(n+'time');
     $(e).parent().parent().fadeOut(500, function() {setTimeout($(e).parent().remove(), 100)});
-}
+};
 
 
 function addTask(addTextTitle, addTextDesc, addTextDate, addTextTime, id) {
-    if (addTextTitle == null || addTextDesc == null) { return}
+    if (addTextTitle == null || addTextDesc == null) {return};
     if (addTextDate == 0 && addTextTime == 0) {
-        $('#tasks').append('<div id=task'+id+' class="task fadein"><div id="taskHeaderContainer"><h1 class="title">'+addTextTitle+'</h1><img onclick="delTask(this)" class="ximg" src="assets/images/x.png" alt="cross"></div><div class="seperator"></div><p id="description">'+addTextDesc+'</p></div>')
+        $('#tasks').append('<div id=task'+id+' class="task fadein"><div id="taskHeaderContainer"><h1 class="title">'+addTextTitle+'</h1><img onclick="delTask(this)" class="ximg" src="assets/images/x.png" alt="cross"></div><div class="seperator"></div><p id="description">'+addTextDesc+'</p></div>');
     } else {
-     $('#tasks').append('<div id=task'+id+' class="task fadein"><div id="taskHeaderContainer"><h1 class="title">'+addTextTitle+'</h1><img onclick="delTask(this)" class="ximg" src="assets/images/x.png" alt="cross"></div><div class="seperator"></div><p id="description">'+addTextDesc+'</p><div class="seperator"></div><p class="duetill">Task due till: '+addTextDate+' at '+addTextTime+'</p></div>')
+     $('#tasks').append('<div id=task'+id+' class="task fadein"><div id="taskHeaderContainer"><h1 class="title">'+addTextTitle+'</h1><img onclick="delTask(this)" class="ximg" src="assets/images/x.png" alt="cross"></div><div class="seperator"></div><p id="description">'+addTextDesc+'</p><div class="seperator"></div><p class="duetill">Task due till: '+addTextDate+' at '+addTextTime+'</p></div>');
     }
     $('.fadein').animate({
         opacity: 1
     }, 800, function() {
-        $('.fadein').removeClass('fadein')
+        $('.fadein').removeClass('fadein');
     });
     dateVar.value = '';
     titleVar.value = '';
     descVar.value = '';
     timeVar.value = '';
-
-}
+};
 
 function devAdd(title, desc, date, time, id, times) {
     for (let i = 0; i < times; i++) {
-        addTask(title, desc, date, time, id)
-    }
-}
+        addTask(title, desc, date, time, id);
+}};
 function bgblur(n) {
-    rootVar.style.setProperty('--blur-val', 'blur('+n+'px)')
-    document.cookie = "blur="+n+"; expires= Thu, 18 Dec 2025 12:00:00 UTC"
-    //$('#settingBlur').text('Window Blur: '+n+'px')
-}
+    if (n == null) {
+        rootVar.style.setProperty('--blur-val', 'blur('+ls.getItem('blur')+'px)');
+        document.getElementById('blurslider').value = ls.getItem('blur');
+    } else {
+    rootVar.style.setProperty('--blur-val', 'blur('+n+'px)');
+    ls.setItem('blur', n);
+}};
 
 function bgImage(img) {
-    rootVar.style.setProperty('--bg-image', 'url('+img+')')
-    ls.setItem('bgImage', img)
-    console.log(img);
-}
+    rootVar.style.setProperty('--bg-image', 'url('+img+')');
+    ls.setItem('bgImage', img);
+};
 
 function lightDark(n) {
     if (n.checked) {
@@ -147,33 +146,22 @@ function lightDark(n) {
     } else {
         rootVar.style.setProperty('--colorscheme', 'rgba(255, 255, 255, 0.352)');
         rootVar.style.setProperty('--text-color', 'black');
-    }
-}
+}};
 function loadBg() {
-    ls.getItem('bgImage')
+    ls.getItem('bgImage');
     if (ls.getItem('bgImage') == null) {
-        rootVar.style.setProperty('--bg-image', 'url(assets/images/chillin.gif)')
-        console.log('no bg image');
+        rootVar.style.setProperty('--bg-image', 'url(assets/images/chillin.gif)');
     } else {
-        rootVar.style.setProperty('--bg-image', 'url('+ls.getItem("bgImage")+')')
-        console.log('bg image');
-    }
-}
-
+        rootVar.style.setProperty('--bg-image', 'url('+ls.getItem("bgImage")+')');
+}};
 function readLocalStoragee() {
     if (ls.getItem('taskCount') == 0 || ls.getItem('taskCount') == null) {
-        console.log('no tasks');
         return;
     }
-    // count up to the value of taskCount
     for (var i = 1; i <= ls.getItem('taskCount'); i++) {
         var title = ls.getItem('task'+i+'title');
         var desc = ls.getItem('task'+i+'desc');
         var date = ls.getItem('task'+i+'date');
         var time = ls.getItem('task'+i+'time');
         addTask(title, desc, date, time, i);
-    }
-
-
-}
-
+}};
