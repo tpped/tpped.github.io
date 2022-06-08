@@ -29,16 +29,10 @@ $(document).ready(function() {
     readLocalStoragee();
     loadBg();
     bgblur();
-    huerotate();
 });
 function huerotate(n) {
-    if (n == null) {
-        rootVar.style.setProperty('--hue-rotateit', 'hue-rotate('+ls.getItem('hue')+'deg)');
-        document.getElementById('hueslider').value = ls.getItem('hue');
-    } else {
     rootVar.style.setProperty('--hue-rotateit', 'hue-rotate('+n+'deg)');
-    ls.setItem('hue', n)
-    }};
+};
 function checks() {
     var pass = true;
     var titleLength = titleVar.value.length;
@@ -125,9 +119,14 @@ function devAdd(title, desc, date, time, id, times) {
         addTask(title, desc, date, time, id);
 }};
 function bgblur(n) {
-    if (n == null) {
-        rootVar.style.setProperty('--blur-val', 'blur('+ls.getItem('blur')+'px)');
-        document.getElementById('blurslider').value = ls.getItem('blur');
+    if (ls.getItem('blur') == null && n == null) {
+        n = 10;
+        rootVar.style.setProperty('--blur-val', 'blur('+n+'px)');
+        document.getElementById('blurslider').value = 10;
+    } else if (n == null) {
+        n = ls.getItem('blur');
+        rootVar.style.setProperty('--blur-val', 'blur('+n+'px)');
+        document.getElementById('blurslider').value = n;
     } else {
     rootVar.style.setProperty('--blur-val', 'blur('+n+'px)');
     ls.setItem('blur', n);
