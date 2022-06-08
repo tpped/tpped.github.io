@@ -124,7 +124,7 @@ function bgblur(n) {
         rootVar.style.setProperty('--blur-val', 'blur('+n+'px)');
         document.getElementById('blurslider').value = 10;
     } else if (n == null) {
-        n = ls.getItem('blur');
+        n = parseInt(ls.getItem('blur'));
         rootVar.style.setProperty('--blur-val', 'blur('+n+'px)');
         document.getElementById('blurslider').value = n;
     } else {
